@@ -8,42 +8,36 @@ using namespace std;
 
 int main()
 {
-    int a = 1;
-    int b = 2;
-    int c = 3;
-    // ...
+    // cin은 데이터를 흘려넣어 보내는 스트림이고
+    // 그 데이터를 해석하는 것은 자료형
+    // 자료형에 따라서 알아서 처리해주기 때문에 scanf()보다 편리
 
-    // 같은 자료형의 데이터를 저장하기 위해 메모리를 미리 잡아놓은 것
-    int my_array[3] = { 1, 2, 3 }; // 초기화할 때는 {} 안에 값 나열
+    char user_input[100];
 
-    // 인덱싱 (zero-based)
-    cout << my_array[0] << " "
-        << my_array[1] << " "
-        << my_array[2] << endl;
+    // cin과 getline의 차이
 
-    // 인덱싱으로 하나 짜리 변수 처럼 사용 가능
-    my_array[1] = 5;
+    /*
+        cout << "원하는 문장을 입력해주세요." << endl;
+        cout << "입력: ";
 
-    cout << my_array[0] << " "
-        << my_array[1] << " "
-        << my_array[2] << endl;
+        // cin >> user_input;
 
-    // cout << my_array[10000] << endl;
+        cin.getline(user_input, sizeof(user_input));
 
-    // 문자열은 기본적으로 문자의 배열
-    char name[] = "Hello, World!"; // 문자''와 문자열"" 구분
-    // Null character '\0'
-    cout << name << " " << sizeof(name) << endl;
+        cout << "메아리: " << user_input << endl;
+    */
 
-    name[0] = 'A';
-    name[1] = 'B';
-    name[2] = 'C';
+    int number = -1;
 
-    cout << name << endl;
+    cin >> user_input;
+    // cin.getline(user_input, sizeof(user_input));
+    cin.ignore(100, '\n');
 
-    name[2] = '\0';
+    cin >> number;
 
-    cout << name << endl;
+    cout << user_input << " " << number << endl;
+
+    // 참고: cin.ignore(numeric_limits<streamsize>::max(),'\n')
 
 	return 0;
 }
