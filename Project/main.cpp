@@ -3,92 +3,41 @@
 */
 
 #include <iostream>
+#include <random> // 난수 생성
 
 using namespace std;
 
 int main()
 {
-	// For 기본 예제
-	for (int i = 0; i < 10; i++)
+	// 난수 생성
+	// https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distrib(1, 99);	// [1, 99]
+
+	int number = distrib(gen);
+
+	while (1) // true 대신 숫자 1로 무한 반복도 많이 사용합니다.
 	{
-		cout << i << " ";
-	}
-	cout << endl;
+		cout << "입력: ";
 
-	// 배열 데이터 출력 연습
-	// 힌트: sizeof(my_array)
-	int my_array[] = { 1, 2, 3, 4, 5, 4, 3, 2, 1 };
+		int guess;
+		cin >> guess;
 
-	for (int i = 0; i < sizeof(my_array) / sizeof(int); i++)
-	{
-		cout << my_array[i] << " ";
-	}
-	cout << endl;
-
-	for (int i = 0; i < sizeof(my_array) / sizeof(int); i++)
-	{
-		cout << my_array[i] << " ";
-
-		if (my_array[i] > my_array[i + 1])
+		if (guess == number)
 		{
+			cout << "정답!" << endl;
 			break;
 		}
-	}
-	cout << endl;
-
-	my_array[7] = 1;
-	my_array[8] = 2;
-	for (int i = 0; i < sizeof(my_array) / sizeof(int); i++)
-	{
-		if (my_array[i] == 1 || my_array[i - 1] < my_array[i])
+		else if (guess > number)
 		{
-			cout << my_array[i] << " ";
+			cout << "너무 커요!" << endl;
+		}
+		else // if (guess < number)
+		{
+			cout << "너무 작아요!" << endl;
 		}
 	}
-	cout << endl;
-
-	// 문자열 출력
-	char my_string[] = "Hello, World!";	// 배열 크기를 알아서 결정
-
-	// 문자열을 한 글자씩 출력하기
-	// 힌트: sizeof(), '\0', break,
-	for (int i = 0; i < my_string[i] != '\0'; i++)
-	{
-		cout << my_string[i];
-	}
-	cout << endl;
-
-	// while 기본 예제
-	int i = 0;
-	while (i < 10)
-	{
-		cout << i << " ";
-		i++; // 무한반복 주의
-	}
-	cout << endl;
-
-	i = 0;
-	while (true)
-	{
-		cout << i << " ";
-		i++;
-
-		if (i == 10)
-		{
-			break;
-		}
-	}
-	cout << endl;
-
-	// while문으로 문자열 한글자씩 출력하기
-	// 힌트 && logical and
-	i = 0;
-	while (i < sizeof(my_string) && my_string[i] != '\0')
-	{
-		cout << my_string[i];
-		i++;
-	}
-	cout << endl;
 
 	return 0;
 }
