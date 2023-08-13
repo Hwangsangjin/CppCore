@@ -6,26 +6,45 @@
 
 using namespace std;
 
-// 함수 (선언과 정의 분리 가능)
-int Add(int a, int b)
-{
-	return a + b; // 반환값
-}
+const int kMaxStr = 100; // 전역 변수
 
-// 반환 자료형이 지정되지 않았음 (void)
-void Add(int a, int b, int* c)
+// 문자열을 매개변수에 넣기
+// 여기서는 모든 문자열의 길이가 동일하다고 가정
+bool IsEqual(const char str1[], const char str2[])
 {
-	*c = a + b;
+    for (int i = 0; i < kMaxStr; i++)
+    {
+        cout << int(str1[i]) << " " << int(str2[i]) << endl;
+
+        // 비교 연산자
+        if (str1[i] != str2[i])
+            return false;
+
+        // 문자열 종료 조건
+        if (str1[i] == '\0')
+            return true;
+    }
 }
 
 int main()
 {
-	cout << Add(1, 2) << endl;
+	// 영어 사용이 디버깅에 유리합니다.
+    const char str1[kMaxStr] = "stop";
 
-	int sum;
-	Add(4, 5, &sum);
+    while (true)
+    {
+        char str2[kMaxStr];
+        cin >> str2;
 
-	cout << sum << endl;
+        if (IsEqual(str1, str2))
+        {
+            cout << "종료합니다." << endl;
+        }
+        else
+        {
+            cout << "계속합니다" << endl;;
+        }
+    }
 
 	return 0;
 }
