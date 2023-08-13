@@ -7,45 +7,58 @@
 
 using namespace std;
 
-struct MyStruct
+class MyClass
 {
-	int first;
-	int second;
-	// ... 추가 가능
-
-	int Sum()
+public:	// 접근 권한
+	MyClass()
 	{
-		return first + second;
+		// 호출 시점 확인
+		cout << "MyClass()" << endl;
+		cout << "this " << this << endl;
 	}
+
+	MyClass(int number) // init_str이 유효한 메모리라고 가정
+	{
+		cout << "MyClass(int number)" << endl;
+		
+		// this 포인터
+		this->number_ = number;
+		cout << "this " << this << endl;
+	}
+
+	~MyClass()
+	{
+		// 호출 시점 확인
+		cout << "~MyClass()" << endl;
+	}
+
+	void Increment(int a)
+	{
+		number_ += a;
+	}
+
+	void Print()
+	{
+		cout << number_ << endl;
+	}
+
+private: // 접근 권한
+	int number_ = 0; // 초기값
 };
 
 int main()
 {
-	// member(.) operator
-	MyStruct a;
-	a.first = 123;
-	a.second = 456;
+	MyClass my_class1;
+	MyClass my_class2(123);
 
-	cout << sizeof(a) << endl;
+	cout << &my_class1 << endl;
+	cout << &my_class2 << endl;
 
-	// 포인터는 member(->) operator가 화살표
-	MyStruct* ptr_a = &a;
+	my_class1.Print();
+	my_class2.Print();
 
-	cout << ptr_a->first << " " << ptr_a->second << " " << ptr_a->Sum() << endl;
-
-	// 배열도 가능
-	MyStruct pairs[10];
-
-	for (int i = 0; i < 10; i++)
-	{
-		pairs[i].first = i;
-		pairs[i].second = i * 10;
-	}
-
-	for (int i = 0; i < 10; i++)
-	{
-		cout << pairs[i].Sum() << endl;
-	}
+	my_class1.Increment(1);
+	my_class1.Print();
 
 	return 0;
 }
