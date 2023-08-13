@@ -3,41 +3,44 @@
 */
 
 #include <iostream>
-#include <random> // 난수 생성
 
 using namespace std;
 
 int main()
 {
-	// 난수 생성
-	// https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distrib(1, 99);	// [1, 99]
+    int a = 123;
 
-	int number = distrib(gen);
+    // address of 주소 연산자 & ampersand
+    cout << a << " " << &a << endl;
 
-	while (1) // true 대신 숫자 1로 무한 반복도 많이 사용합니다.
-	{
-		cout << "입력: ";
+    int* b = &a; // b에 a의 주소 대입
 
-		int guess;
-		cin >> guess;
+    // deference operator (역참조 연산자)
+    cout << *b << endl;
 
-		if (guess == number)
-		{
-			cout << "정답!" << endl;
-			break;
-		}
-		else if (guess > number)
-		{
-			cout << "너무 커요!" << endl;
-		}
-		else // if (guess < number)
-		{
-			cout << "너무 작아요!" << endl;
-		}
-	}
+    *b = 567;
+
+    cout << a << " " << b << " " << *b << endl;
+
+    // 포인터 자체의 주소 크기와 자료형의 크기 (주소의 크기는 항상 동일하다.)
+    double* c = nullptr; // 아무 주소도 가리키고 있지 않다는 의미로 초기화, 0도 많이 사용
+
+    cout << sizeof(int) << " " << sizeof(double) << endl;
+    cout << sizeof(int*) << " " << sizeof(double*) << endl;
+    cout << sizeof(b) << " " << sizeof(c) << endl;
+
+    // 포인터 연산과 배열
+    // size_t (여기서는 주소를 10진수로 변환 용도)
+    cout << sizeof(size_t) << endl; // 8
+    cout << size_t(b) << " " << size_t(b + 1) << " " << size_t(b + 2) << endl;
+    cout << size_t(c) << " " << size_t(c + 1) << " " << size_t(c + 2) << endl;
+
+    // 문자열
+    char my_str[] = { 'h', 'e', 'l', 'l', 'o' }; // "Hello"
+
+    char* ptr = my_str; // 배열의 이름은 포인터
+
+    cout << *(ptr + 3) << endl;
 
 	return 0;
 }
