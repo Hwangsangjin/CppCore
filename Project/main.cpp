@@ -3,25 +3,41 @@
 */
 
 #include <iostream>
-#include <cstring>
-
-#include "MyClass.h"
+#include <fstream>
 
 using namespace std;
 
 int main()
 {
-	MyClass my_class1;
-	MyClass my_class2(123);
+	// 파일 출력
+	{
+		ofstream ofile;
 
-	my_class1.Print();
-	my_class2.Print();
+		ofile.open("my_contacts.txt");
+		ofile << "안녕하세요? 반갑습니다.\n";
+		ofile << "두 번째 줄입니다.\n";
+		ofile << "세 번째 줄입니다.\n";
+		ofile.close();
+	}
 
-	my_class1.Increment(1);
-	my_class1.Print();
+	// 파일 입력
+	{
+		char line[100];
 
-	my_class1.Decrement(1);
-	my_class1.Print();
+		ifstream ifile;
+		ifile.open("my_contacts.txt");
+
+		int line_number = 0;
+		while (ifile.getline(line, sizeof(line)))
+		{
+			cout << line_number << " : ";
+			cout << line << endl;
+
+			line_number += 1;
+		}
+		
+		ifile.close();
+	}
 
 	return 0;
 }
