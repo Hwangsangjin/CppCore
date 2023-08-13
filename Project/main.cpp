@@ -8,36 +8,37 @@ using namespace std;
 
 int main()
 {
-    // cin은 데이터를 흘려넣어 보내는 스트림이고
-    // 그 데이터를 해석하는 것은 자료형
-    // 자료형에 따라서 알아서 처리해주기 때문에 scanf()보다 편리
+	// 0이 아니면 true
+	// 나머지 연산자 %
+	// 줄 바꿈 '\n' newline
+	// 블럭 내용이 한 줄일 경우에는 {} 생략 가능
 
-    char user_input[100];
+	int number;
 
-    // cin과 getline의 차이
+	cin >> number;
 
-    /*
-        cout << "원하는 문장을 입력해주세요." << endl;
-        cout << "입력: ";
+	if (number % 2 == 0)
+		cout << "짝수입니다.\n";
+	else
+		cout << "홀수입니다.\n";
 
-        // cin >> user_input;
+	// 조건 연산자 (삼항 연산자)
+	cout << (number % 2 == 0 ? "짝수입니다." : "홀수입니다.") << endl;
 
-        cin.getline(user_input, sizeof(user_input));
+	// switch - case
 
-        cout << "메아리: " << user_input << endl;
-    */
-
-    int number = -1;
-
-    cin >> user_input;
-    // cin.getline(user_input, sizeof(user_input));
-    cin.ignore(100, '\n');
-
-    cin >> number;
-
-    cout << user_input << " " << number << endl;
-
-    // 참고: cin.ignore(numeric_limits<streamsize>::max(),'\n')
+	switch (number)
+	{
+	case 0:
+		cout << "정수 0입니다." << endl;
+		break; // 생략 주의
+	case 1:
+		cout << "정수 1입니다." << endl;
+		break;
+	default:
+		cout << "그 외의 숫자입니다." << endl;
+		break; // 마지막은 생략 가능
+	}
 
 	return 0;
 }
